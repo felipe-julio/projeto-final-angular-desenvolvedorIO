@@ -5,8 +5,12 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './menu.component.html'
 })
 
-export class MenuComponent implements OnInit {
-    constructor() { }
+export class MenuComponent {
 
-    ngOnInit() { }
+    public isCollapsed: boolean;
+
+    constructor() {
+        this.isCollapsed = true;
+     }
+    
 }
