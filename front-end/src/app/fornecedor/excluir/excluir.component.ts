@@ -26,8 +26,7 @@ export class ExcluirComponent implements OnInit{
     private router: Router,
     private toastr: ToastrService) {
 
-    this.fornecedorService.obterPorId(this.id)
-      .subscribe(fornecedor => this.fornecedor = fornecedor);
+      this.fornecedor = this.route.snapshot.data['fornecedor'];
   }
 
   excluirEvento() {

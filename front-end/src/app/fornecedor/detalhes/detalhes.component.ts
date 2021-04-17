@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Fornecedor } from '../models/fornecedor';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { ActivatedRoute } from '@angular/router';
-import { FornecedorService } from '../services/fornecedor.service';
 
 @Component({
   selector: 'app-detalhes',
@@ -12,6 +12,7 @@ export class DetalhesComponent implements OnInit {
 
   fornecedor: Fornecedor = new Fornecedor();
   id: string | null = null;
+  public enderecoMap : any;
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -21,9 +22,17 @@ export class DetalhesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private fornecedorService: FornecedorService) {
-      this.fornecedorService.obterPorId(this.id)
-      .subscribe(fornecedor => this.fornecedor = fornecedor);
+    private sanitizer: DomSanitizer 
+    ) {
+
+      this.fornecedor = this.route.snapshot.data['fornecedor'];
+      this.enderecoMap = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + 
+      this.EnderecoCompleto() +
+      "&key=AIzaSyDkR3lYbGIPO7A5JNNOqd2cUAHVrBW6GJU"); 
+  }
+
+  public  EnderecoCompleto(): string {
+     return this.fornecedor.endereco.logradouro + ", " + this.fornecedor.endereco.numero + " - " + this.fornecedor.endereco.bairro + ", " + this.fornecedor.endereco.cidade;
   }
 
 }
