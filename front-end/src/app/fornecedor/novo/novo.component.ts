@@ -192,6 +192,8 @@ export class NovoComponent implements OnInit {
     this.fornecedorForm.reset();
     this.errors = [];
 
+    this.mudancasNaoSalvas = false;
+
     let toast = this.toastr.success('Fornecedor cadastrado com sucesso!', 'Sucesso!');
     if (toast) {
       toast.onHidden.subscribe(() => {
