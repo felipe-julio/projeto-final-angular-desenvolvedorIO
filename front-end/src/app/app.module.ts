@@ -1,3 +1,4 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FornecedorModule } from './fornecedor/fornecedor.module';
 import { NavegacaoModule } from './navegacao/navegacao.module';
+import { ErrorInterceptor } from './services/error.handler.service';
+
+export const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+]
 
 @NgModule({
   declarations: [
@@ -21,9 +27,12 @@ import { NavegacaoModule } from './navegacao/navegacao.module';
     NgbModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(), 
-    FornecedorModule
+    FornecedorModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
