@@ -16,6 +16,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgBrazil } from 'ng-brazil';
 import { TextMaskModule } from 'angular2-text-mask';
 import { FornecedorGuard } from './services/fornecedor.guard';
+import { ListaProdutosComponent } from './produtos/lista-produtos.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FornecedorGuard } from './services/fornecedor.guard';
     ListaComponent,
     EditarComponent,
     ExcluirComponent,
-    DetalhesComponent
+    DetalhesComponent,
+    ListaProdutosComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,7 @@ import { FornecedorGuard } from './services/fornecedor.guard';
   providers: [
     FornecedorService,
     FornecedorResolve,
-    FornecedorGuard
+    FornecedorGuard 
   ]
 })
 
